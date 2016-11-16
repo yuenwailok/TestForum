@@ -22,18 +22,15 @@
                     Total Posts
                 </th>
             </tr>
-            <tr>
-                <td>17/08/16 7:17 PM</td>
-                <td>Area - Mental illnesses/dissability</td>
-                <td>Cristobal Escudero</td>
-                <td>3</td>
-            </tr>
-            <tr>
-                <td>17/08/16 7:17 PM</td>
-                <td>Area - Mental illnesses/dissability</td>
-                <td>Cristobal Escudero</td>
-                <td>3</td>
-            </tr>                
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Date</td>
+                    <td>@item.ThreadName</td>
+                    <td>@item.Author</td>
+                    <td>@item.TotalPosts</td>
+                </tr>
+            }
         </table>
     </body>
 </html>
