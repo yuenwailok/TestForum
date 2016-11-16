@@ -1,0 +1,22 @@
+﻿#bigbig {
+    vertical-align: text-top;
+}
+
+table {
+    width:100%;
+}
+
+#Reply
+{
+    border:solid;
+    padding: 10px;
+}
+
+#Sub-Reply
+{
+    margin:10px;
+    padding: 10px;
+    position: relative;
+    left:5px;
+    border:solid;
+}

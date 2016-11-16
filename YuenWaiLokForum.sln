@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YuenWaiLokForum", "YuenWaiLokForum\YuenWaiLokForum.csproj", "{A73640A5-4000-4B85-AEF1-CCBB205824F4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YuenWaiLokForum.Tests", "YuenWaiLokForum.Tests\YuenWaiLokForum.Tests.csproj", "{270F39C1-BD18-4153-A8A0-65555720ADA0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A73640A5-4000-4B85-AEF1-CCBB205824F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A73640A5-4000-4B85-AEF1-CCBB205824F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A73640A5-4000-4B85-AEF1-CCBB205824F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A73640A5-4000-4B85-AEF1-CCBB205824F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{270F39C1-BD18-4153-A8A0-65555720ADA0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{270F39C1-BD18-4153-A8A0-65555720ADA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{270F39C1-BD18-4153-A8A0-65555720ADA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{270F39C1-BD18-4153-A8A0-65555720ADA0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
