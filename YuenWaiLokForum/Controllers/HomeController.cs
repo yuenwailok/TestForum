@@ -12,60 +12,76 @@ namespace YuenWaiLokForum.Controllers
         public ActionResult Index()
         {
             return View();
+
+        }
+
+        public ActionResult Test()
+        {
+            return View();
         }
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
-            var entities = new ForumModel();
             var forums = new List<ForumViewModel>();
-            foreach (var forum in entities.Forums.ToList())
+
+            using (var unitOfWork = new UnitOfWork(new ForumModel()))
             {
-                var query1 = (from thread in entities.Threads
-                              where forum.F_Id == thread.F_Id
-                              select thread.Author);
-
-                var query2 = from reply in entities.Replies
-                             where forum.F_Id == reply.F_Id
-                             select reply.Author;
-
-                var result = query1.Concat(query2);
-
-                var result2 = result.Distinct();
-                forums.Add(new ForumViewModel
+                foreach (var forum in unitOfWork.Forums.GetAll())
                 {
-                    Name = forum.Name,
-                    Description = forum.Description,
-                    TotalPosts = query1.Count(),                    
-                    TotalParticipants = result2.Count()
-                });
+                    forums.Add(new ForumViewModel
+                    {
+                        Name = forum.Name,
+                        Description = forum.Description,
+                        TotalPosts = unitOfWork.Replies.GetAllByF_Id(forum.F_Id).Count(),
+                        TotalParticipants = unitOfWork.TotalParticipants(forum)
+                    });
+
+                }
             }
-            
             return View(forums);
         }
 
         public ActionResult ThreadList()
         {
-            var entities = new ForumModel();
             var threads = new List<ThreadViewModel>();
-            foreach (var thread in entities.Threads.ToList())
+            using (var unitOfWork = new UnitOfWork(new ForumModel()))
             {
-                threads.Add(new ThreadViewModel
+                foreach (var thread in unitOfWork.Threads.GetAllByF_Id(5))
                 {
-                    ThreadName = thread.ThreadName,
-                    Author = thread.Author,
-                    Date = thread.Date,
-                    TotalPosts = (from reply in entities.Replies
-                                  where thread.T_Id == reply.T_Id
-                                  select reply).Count()
-                });
+                    threads.Add(new ThreadViewModel
+                    {
+                        ThreadName = thread.ThreadName,
+                        Author = thread.Author,
+                        Date = thread.Date,
+                        TotalPosts = unitOfWork.Replies.GetAllByT_Id(thread.T_Id).Count()
+                    });
+
+                }
+
             }
             return View(threads);
         }
 
-        public ActionResult Thread()
+        public ActionResult Thread(int id = 0)
         {
-            return View();
+            using (var unitOfWork = new UnitOfWork(new ForumModel()))
+            {
+                var th = unitOfWork.Threads.GetById(1);
+
+                var threadDetail = new ThreadDetailViewModel
+                {
+                    Author = th.Author,
+                    Content = th.Content,
+                    Date = th.Date,
+                    Topic = th.ThreadName,
+                    replies = new List<ReplyViewModel>()
+                };
+
+                ReplyService rs = new ReplyService();
+                rs.insertReply(th, threadDetail);
+
+                return View(threadDetail);
+            }
         }
 
         public ActionResult Reply()

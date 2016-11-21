@@ -1,6 +1,38 @@
-﻿
+﻿@using YuenWaiLokForum.Models;
+
 @{
     ViewBag.Title = "Thread";
+}
+
+@helper DisplayReply(ReplyViewModel reply)
+{
+    <ul>
+        <li>
+            <div id="header">
+                <table>
+                    <tr>
+                        <td><b>@reply.Author</b></td>
+                        <td align="right">@reply.Date</td>
+                    </tr>
+                    <tr>
+                        <td><b>@reply.Title</b></td>
+                    </tr>
+                </table>
+            </div>
+            <br />
+            <div id="content">
+                <p>@reply.Content</p>
+            </div>
+            <button>Reply</button>
+            <button>Quote</button>
+            <p/>
+            @for (int i = 0; i < reply.replies.Count; i++)
+            {
+                @DisplayReply(reply.replies[i]);
+
+            }
+        </li>
+    </ul>
 }
 
 <html>
@@ -8,69 +40,36 @@
     <link rel="stylesheet" type="text/css" href="~/Content/forum.css">
     <br />
     <br />
-    <div id="Reply">
+
+    <div class="Reply">
         <div id="header" align="right">
             <table>
                 <tr>
-                    <td><b>Cristobal Escudero</b></td>
-                    <td align="right">17 August 2016 7:17:34 PM</td>
+                    <td><b>@Model.Author</b></td>
+                    <td align="right">@Model.Date</td>
                 </tr>
                 <tr>
-                    <td><b>Area - Mental illnesses/dissability</b></td>
+                    <td><b>@Model.Topic</b></td>
                 </tr>
+
             </table>
+
+
         </div>
         <br />
         <div id="content">
-            <p>Hi evening class peeps,</p>
-            <p>Zohair and I are looking for other members of the class whose topics is Mental illnesses/disability.</p>
-            <p>I'm doing a piece in Autism so let us know if you want to form a group.</p>
-            <p>FYI, if your topic is Depression I think there is another group for this.</p>
-            <p>Thanks,</p>
-            <p>Cris</p>
+            @Model.Content
         </div>
         <button>Reply</button>
+        
     </div>
 
     <br />
-    <div id="Reply">
-        <div id="header">
-            <table>
-                <tr>
-                    <td><b>Dong Kyun Woo</b></td>
-                    <td align="right">17 August 2016 7:17:34 PM</td>
-                </tr>
-                <tr>
-                    <td><b>RE: Area - Mental illnesses/dissability</b></td>
-                </tr>
-            </table>
-        </div>
-        <br />
-        <div id="content">
-            <p>Hey, if you havn't found enough members yet, I'm working around the issue of quality of life for Advanced-dementia in elderly people!</p>
-        </div>
-        <button>Reply</button>
-        <button>Quote</button>
-        <div id="Sub-Reply">
-            <div id="header">
-                <table>
-                    <tr>
-                        <td><b>Dong Kyun Woo</b></td>
-                        <td align="right">17 August 2016 7:17:34 PM</td>
-                    </tr>
-                    <tr>
-                        <td><b>RE: Area - Mental illnesses/dissability</b></td>
-                    </tr>
-                </table>
-            </div>
-            <br />
-            <div id="content">
-                <p>Hey, if you havn't found enough members yet, I'm working around the issue of quality of life for Advanced-dementia in elderly people!</p>
-            </div>
-            <button>Reply</button>
-            <button>Quote</button>
-        </div>
+    <div class="Reply">
+        @foreach (var item in Model.replies)
+        {
+            @DisplayReply(item);
+        }
     </div>
-                
 </body>
 </html>
